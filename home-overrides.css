@@ -115,6 +115,10 @@ h2,
     margin: 0 auto;
 }
 
+.about-me-button .about-me-badge {
+    width: 90px;
+}
+
 .home-about-panel > .window-body {
     display: flex;
     flex-direction: column;
