@@ -1,0 +1,34 @@
+body {
+    cursor: url("../assets/cursors/my-melody.png") 0 0, auto;
+}
+
+a,
+button,
+select {
+    cursor: url("../assets/cursors/my-melody-link.png") 6 2, pointer;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+#player-title-bar,
+#songLabel,
+#statusLabel,
+#playerLogo {
+    cursor: url("../assets/cursors/my-melody-text.png") 16 14, text;
+}
+
+input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),
+textarea,
+[contenteditable="true"] {
+    cursor: url("../assets/cursors/my-melody-text.png") 16 14, text;
+}
+
+input[type="range"] {
+    cursor: ew-resize;
+}

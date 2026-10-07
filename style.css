@@ -11,13 +11,13 @@ body {
     background: #fff2f8 url("assets/heartgrid.gif") repeat;
     font: 14px/1.55 Tahoma, Verdana, Arial, sans-serif;
     color: #5d3450;
-    cursor: url("assets/cursors/my-melody.cur"), auto
+    cursor: url("assets/cursors/my-melody.png") 0 0, auto
 }
 
 a,
 button,
 select {
-    cursor: url("assets/cursors/my-melody-link.cur"), pointer
+    cursor: url("assets/cursors/my-melody-link.png") 6 2, pointer
 }
 
 p,
@@ -36,13 +36,17 @@ figcaption,
 summary,
 th,
 td {
-    cursor: url("assets/cursors/my-melody-text.cur"), text
+    cursor: url("assets/cursors/my-melody-text.png") 16 14, text
 }
 
 input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),
 textarea,
 [contenteditable="true"] {
-    cursor: url("assets/cursors/my-melody-text.cur"), text
+    cursor: url("assets/cursors/my-melody-text.png") 16 14, text
+}
+
+input[type="range"] {
+    cursor: ew-resize
 }
 
 [draggable="true"],
