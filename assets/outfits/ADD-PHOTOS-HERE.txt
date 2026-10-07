@@ -1,0 +1,1 @@
+Add your outfit photos here, for example look-01.jpg, then replace the placeholder block in outfits.html with an img tag.

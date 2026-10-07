@@ -1,0 +1,39 @@
+body {
+    color: #684627;
+}
+
+a,
+button,
+select,
+.win98-titlebar,
+.win98-button,
+.marquee-wrap,
+.status-ribbon b,
+.page-divider,
+.quick-links a,
+.site-footer a,
+.now-list dt,
+.profile-list dt,
+.tiny-text,
+.subtle,
+.cat-photo-placeholder,
+.outfit-placeholder,
+.cat-stats strong,
+#statuscafe-username,
+.calendar-cell.today,
+#player-title-bar,
+#info-screen,
+#playerLogo,
+.toggle-button[data-on] {
+    color: #684e27;
+}
+
+.top-nav .win98-button {
+    background: #594737;
+    color: #f9baa3;
+}
+
+.digital-clock,
+#songLabel {
+    color: #dfc49b;
+}

@@ -1,0 +1,25 @@
+(()=>{
+const playlists={"LARI'S PLAYLIST":"PLNz7Mr6nwRLE"};
+let current="LARI'S PLAYLIST",player,ticker=null,mutedVolume=50,slidingSeek=false,slidingVolume=false,shuffle=false,videoVisible=true;
+const q=id=>document.getElementById(id),song=q("songLabel"),status=q("statusLabel"),volumeButton=q("volumeButton"),volumeBar=q("volumeBar"),videoButton=q("videoButton"),seekBar=q("seekBar"),prev=q("prevButton"),play=q("playButton"),stop=q("stopButton"),next=q("nextButton"),shuffleButton=q("shuffleButton"),playlistSelector=q("playlistSelector"),info=q("infoButton");
+Object.keys(playlists).forEach(name=>{const o=document.createElement("option");o.value=name;o.textContent=name;playlistSelector.appendChild(o)});
+playlistSelector.value=current;
+const api=document.createElement("script");api.src="https://www.youtube.com/iframe_api";document.head.appendChild(api);
+const fmt=n=>{const m=Math.floor((n||0)/60),s=Math.floor((n||0)-m*60);return `${m}:${String(s).padStart(2,"0")}`};
+const update=()=>{if(!player||typeof player.getPlayerState!=="function")return;const d=player.getVideoData?.()||{};song.textContent=d.title?`${d.title} — ${d.author||""}`:"READY";const state=player.getPlayerState(),names={"-1":"Stopped","0":"Ended","1":"Playing","2":"Paused","3":"Loading","5":"Cued"},list=player.getPlaylist?.()||[];status.textContent=`${names[state]||"Ready"} ${player.getPlaylistIndex?.()+1||0}/${list.length} ${fmt(player.getCurrentTime?.())}/${fmt(player.getDuration?.())}`;if(!slidingSeek){seekBar.max=player.getDuration?.()||100;seekBar.value=player.getCurrentTime?.()||0}if(!slidingVolume)volumeBar.value=player.getVolume?.()??50;play.textContent=state===1?"❚❚":"▶"};
+const showError=code=>{const messages={2:"parâmetro inválido",5:"erro do player HTML5",100:"vídeo removido ou privado",101:"vídeo não permite reprodução incorporada",150:"vídeo não permite reprodução incorporada",153:"YouTube não recebeu o referrer/origin do site"};status.textContent=`YouTube error ${code}: ${messages[code]||"erro de reprodução"}`};
+window.onYouTubeIframeAPIReady=()=>{const referrer=document.referrer||window.location.href;player=new YT.Player("youtube-player",{height:"100%",width:"100%",playerVars:{controls:0,autoplay:1,playsinline:1,loop:1,origin:window.location.origin,widget_referrer:referrer},events:{onReady:()=>{player.loadPlaylist({list:playlists[current],listType:"playlist",index:0});player.setVolume(50);player.setLoop(true);player.playVideo();update()},onStateChange:e=>{if(e.data===YT.PlayerState.ENDED)player.nextVideo();update();clearInterval(ticker);ticker=setInterval(update,500)},onError:e=>{showError(e.data);if([100,101,150].includes(e.data))setTimeout(()=>player.nextVideo(),1200)},onAutoplayBlocked:()=>{status.textContent="Autoplay com som bloqueado pelo navegador — clique ▶"}}})};
+volumeButton.addEventListener("click",()=>{if(!player)return;if(player.getVolume()!==0){mutedVolume=player.getVolume();player.setVolume(0);volumeBar.value=0;volumeButton.textContent="MUTE"}else{player.setVolume(mutedVolume||50);volumeBar.value=mutedVolume||50;volumeButton.textContent="VOL"}});
+volumeBar.addEventListener("input",()=>{if(!player)return;slidingVolume=true;player.setVolume(Number(volumeBar.value));volumeButton.textContent=Number(volumeBar.value)===0?"MUTE":"VOL"});
+volumeBar.addEventListener("change",()=>slidingVolume=false);
+videoButton.addEventListener("click",()=>{videoVisible=!videoVisible;q("youtube-player").style.visibility=videoVisible?"visible":"hidden";videoButton.dataset.on=String(videoVisible);videoButton.textContent=videoVisible?"VIDEO ●":"VIDEO ○"});
+seekBar.addEventListener("input",()=>{if(!player)return;slidingSeek=true;player.seekTo(Number(seekBar.value),true)});
+seekBar.addEventListener("change",()=>slidingSeek=false);
+play.addEventListener("click",()=>{if(!player)return;player.getPlayerState()===1?player.pauseVideo():player.playVideo()});
+stop.addEventListener("click",()=>player?.stopVideo());
+next.addEventListener("click",()=>player?.nextVideo());
+prev.addEventListener("click",()=>player?.previousVideo());
+shuffleButton.addEventListener("click",()=>{if(!player)return;shuffle=!shuffle;shuffleButton.dataset.on=String(shuffle);shuffleButton.textContent=shuffle?"SHUF ●":"SHUF ○";player.setShuffle(shuffle)});
+playlistSelector.addEventListener("change",()=>{if(!player)return;current=playlistSelector.value;player.stopVideo();player.loadPlaylist({list:playlists[current],listType:"playlist",index:0})});
+info.addEventListener("click",()=>alert("Webdeck Player\nOriginal project by Chris\ngithub.com/cristiancfm/webdeck-player\nMIT License\nSilver setup adapted for Slavikova"));
+})();

@@ -1,0 +1,174 @@
+*,
+*::before,
+*::after {
+    border-radius: 3px;
+}
+
+html {
+    overflow-x: clip;
+    scrollbar-gutter: stable;
+}
+
+body {
+    font-family: "Manrope", sans-serif;
+}
+
+h1,
+h2,
+.chewy-regular,
+.win98-titlebar,
+.win98-button,
+.page-divider span,
+.site-footer > p:first-of-type {
+    font-family: "Agbalumo", cursive;
+}
+
+.win98-window {
+    border-color: #665f5f;
+    box-shadow: 2px 2px 0 #6e6362, -1px -1px 0 #6e6362;
+}
+
+.win98-titlebar,
+.yellow-title {
+    background: linear-gradient(90deg, #fff0a7, #fff0a7);
+}
+
+.top-nav .win98-button {
+    background: linear-gradient(180deg, #fffafd 0%, #ffeef5 58%, #ffe3ef 100%);
+    box-shadow: 0 0 7px #ffe8f2, 1px 1px 0 #d98cac;
+}
+
+.guestbook-page > img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+.about-me-badge {
+    display: block;
+    width: 90px;
+    max-width: 100%;
+    height: auto;
+}
+
+.list-cloud .section-divider {
+    flex-basis: 100%;
+}
+
+.archive-list {
+    flex-wrap: wrap;
+}
+
+.outfit-intro {
+    position: relative;
+    padding-right: 145px;
+}
+
+.outfit-cake {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: block;
+    width: 115px;
+    height: 115px;
+    image-rendering: pixelated;
+}
+
+.footer-divider {
+    width: 100vw;
+    margin: 16px 0 0 calc(50% - 50vw);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.full-width-divider {
+    display: block;
+    width: 100vw;
+    height: 55px;
+    max-width: none;
+    margin: 16px 0 0 calc(50% - 50vw);
+}
+
+.about-stars-divider {
+    display: block;
+    width: 100%;
+    height: 55px;
+}
+
+.cats-sparkle-divider {
+    width: 100%;
+    height: 49px;
+    margin-top: 16px;
+    background: url("assets/dividers/hangingsparklehearts.gif") repeat-x top left;
+}
+
+.cat-notes-body {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.cat-notes-body .decorated-copy {
+    flex: 1;
+    min-width: 0;
+}
+
+.cat-notes-art {
+    display: block;
+    width: 200px;
+    max-width: 35%;
+    height: auto;
+    margin-left: auto;
+}
+
+.cursor-star-trail {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    color: #f1d66a;
+    font-size: 12px;
+    line-height: 1;
+    text-shadow: 0 0 4px #948650;
+    animation: star-trail-fade 650ms ease-out forwards;
+}
+
+@media (max-width: 560px) {
+    .outfit-intro {
+        padding-right: 14px;
+        padding-top: 122px;
+    }
+
+    .outfit-cake {
+        top: 10px;
+        right: 50%;
+        transform: translateX(50%);
+    }
+}
+
+@keyframes star-trail-fade {
+    to {
+        opacity: 0;
+        transform: translateY(-12px) scale(.45) rotate(35deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cursor-star-trail {
+        animation: none;
+        opacity: 0;
+    }
+}
+
+@media (max-width: 560px) {
+    .cat-notes-body {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+
+    .cat-notes-art {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+}
